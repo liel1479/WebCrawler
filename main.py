@@ -87,9 +87,8 @@ class GitlabCrawler:
 
 def main():
     chromedriver_path = r"chromedriver.exe"
-    # newurl = input('please enter the repo url:')
-    url = "https://gitlab.cern.ch/webservices/cern-search/web-crawler"
-    branch_name = 'master'
+    url = input('please enter the repo url:')
+    branch_name = input('please enter branch name:')
 
     git_crawler = GitlabCrawler(chromedriver_path, url, branch_name)
     commits, first_commit_id, to_save = git_crawler.crawl()
@@ -102,7 +101,6 @@ def main():
         df = pd.DataFrame.from_records([commit.get_dict() for commit in commits])
         if to_save:
             df.to_excel("output.xlsx")
-        # print(df)
         sleep(120)
 
 
