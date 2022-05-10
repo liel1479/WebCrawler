@@ -87,8 +87,8 @@ class GitlabCrawler:
 
 def main():
     chromedriver_path = r"chromedriver.exe"
-    url = input('please enter the repo url:')
-    branch_name = input('please enter branch name:')
+    url = input('Please enter the repository url:')
+    branch_name = input('Please enter branch name:')
 
     git_crawler = GitlabCrawler(chromedriver_path, url, branch_name)
     commits, first_commit_id, to_save = git_crawler.crawl()
