@@ -1,6 +1,4 @@
-[//]:<>(This is a comment)
 
-[//]:<>(This is a comment)
 # Web Crawler - GitLab
 ## Description
 ### What is a web crawler?
