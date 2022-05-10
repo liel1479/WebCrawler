@@ -61,7 +61,7 @@ class GitlabCrawler:
         print(first_commit_id, first_commit_id_last_iter)
 
         if check and first_commit_id_last_iter:
-         if first_commit_id_last_iter == first_commit_id:
+            if first_commit_id_last_iter == first_commit_id:
                 print('nothing new, going to sleep for 2 minutes')
                 return [], first_commit_id, False
 
@@ -87,7 +87,7 @@ class GitlabCrawler:
 
 def main():
     chromedriver_path = r"chromedriver.exe"
-    #newurl = input('please enter the repo url:')
+    # newurl = input('please enter the repo url:')
     url = "https://gitlab.cern.ch/webservices/cern-search/web-crawler"
     branch_name = 'master'
 
@@ -95,14 +95,15 @@ def main():
     commits, first_commit_id, to_save = git_crawler.crawl()
     df = pd.DataFrame.from_records([commit.get_dict() for commit in commits])
     df.to_excel("output.xlsx")
+    sleep(120)
 
     while True:
-        commits, first_commit_id, to_save = git_crawler.crawl(check=True, first_commit_id=first_commit_id)
+        commits, first_commit_id, to_save = git_crawler.crawl(check=True, first_commit_id_last_iter=first_commit_id)
         df = pd.DataFrame.from_records([commit.get_dict() for commit in commits])
-        df.to_excel("output.xlsx")
-        #print(df)
+        if to_save:
+            df.to_excel("output.xlsx")
+        # print(df)
         sleep(120)
-
 
 
 if __name__ == '__main__':
